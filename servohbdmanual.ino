@@ -5,18 +5,21 @@ Servo myServo;
 const int manual = 0;
   const int potmeter = A0;
   int val;
+  const int buttonPin =2;
+  int buttonState = 0; 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   myServo.attach(9);
    myServo.write(0);
-   
+  pinMode(buttonPin, INPUT);
   
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-if (manual == 0) {
+buttonState = digitalRead(buttonPin);
+if (buttonState == 0) {
   val = analogRead(potmeter);
   val = map(val, 0,1023, 0, 180);
   Serial.println(val);
